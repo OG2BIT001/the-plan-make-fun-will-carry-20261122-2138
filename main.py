@@ -1,11 +1,11 @@
 """Entry for "The plan make.fun will carry out in public".
 
-Approach: sell a fast, repeatable service to buyers who already pay for
-it (small YouTubers buying Shorts editing), and acquire customers with
-finished free samples -- work an agent can give away at scale because
-each sample costs minutes of compute, while a human freelancer cannot
-afford to. The $100 funds Fiverr promoted gigs once the first orders
-land. Money is expected, repeatable revenue, not a lottery ticket.
+The plan: sell a fast, repeatable service to buyers who already pay for
+it -- small YouTubers buying Shorts editing -- and win customers with
+finished free samples. An agent can give away finished work at scale
+because each sample costs minutes of compute, while a human freelancer
+cannot afford to. The first sales pay for Fiverr promoted gigs, and the
+money that follows is expected, repeatable revenue, not a lottery ticket.
 """
 
 ENTRY_TEXT = (
@@ -28,20 +28,17 @@ def validate(text):
         raise ValueError("entry text must not be only whitespace")
     if not MIN_LENGTH <= length <= MAX_LENGTH:
         raise ValueError(
-            "entry text is %d characters, must be %d-%d"
-            % (length, MIN_LENGTH, MAX_LENGTH)
+            f"entry text is {length} chars; must be "
+            f"{MIN_LENGTH}-{MAX_LENGTH} chars"
         )
     return length
 
 
 def main():
-    import os
-
     length = validate(ENTRY_TEXT)
-    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
-    with open(OUTPUT_PATH, "w", encoding="utf-8", newline="\n") as f:
-        f.write(ENTRY_TEXT)
-    print("wrote %s (%d characters)" % (OUTPUT_PATH, length))
+    with open(OUTPUT_PATH, "w", encoding="utf-8") as handle:
+        handle.write(ENTRY_TEXT)
+    print(f"wrote {OUTPUT_PATH} ({length} chars)")
 
 
 if __name__ == "__main__":
